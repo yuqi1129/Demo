@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mybatis-pagination-bd-0.0.3">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-pagination-bd/0.0.3/mybatis-pagination-bd-0.0.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,44 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuqi.mapping.UserMapper">
+
+    <sql id="TABLE_NAME">user</sql>
+
+    <!--type 这里是如何映射的，最好把包直接映射过来 -->
+    <resultMap id="selectResult" type="com.yuqi.pojo.User">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <sql id="INSERT_COLUMNS">name</sql>
+
+    <sql id="INSERT_PROPERTIES">#{name}</sql>
+
+    <select id="list" resultMap="selectResult">
+        SELECT * FROM
+        <include refid="TABLE_NAME"/>
+    </select>
+
+    <select id="getUserById" parameterType="int" resultMap="selectResult">
+        SELECT * FROM
+        <include refid="TABLE_NAME"/>
+        WHERE
+        id = #{id}
+    </select>
+
+    <select id="getUserByIdByPage" resultMap="selectResult">
+        SELECT * FROM
+        <include refid="TABLE_NAME"/>
+        where 1 = 1
+        <if test="idList != null">
+            AND id in
+            <foreach collection="idList" open="(" close=")" separator="," item="i">
+                #{i}
+            </foreach>
+        </if>
+    </select>
+
+
+</mapper>

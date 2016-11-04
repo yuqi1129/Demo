@@ -1,0 +1,53 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuqi.mapping.CompanyMapper">
+
+    <sql id="TABLE_NAME">company</sql>
+
+    <!--type 这里是如何映射的，最好把包直接映射过来 -->
+    <resultMap id="selectResult" type="com.yuqi.pojo.Company">
+
+        <result column="company_id" jdbcType="INTEGER" property="companyId"/>
+        <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+        <result column="company_scale" jdbcType="VARCHAR" property="companyScale" />
+        <result column="company_intro" jdbcType="VARCHAR" property="companyIntro"/>
+        <result column="company_logo" jdbcType="VARCHAR" property="companyLogo" />
+        <result column="company_tag" jdbcType="VARCHAR" property="companyTag" />
+        <result column="company_bg" jdbcType="VARCHAR" property="companyBg" />
+        <result column="company_site" jdbcType="VARCHAR" property="companySite" />
+        <result column="company_comment_score" jdbcType="FLOAT" property="companyComentScore" />
+        <result column="company_average_salary" jdbcType="FLOAT" property="companyAverageScale" />
+        <result column="company_found_date" jdbcType="DATE" property="companyFoundDate" />
+        <result column="company_address" jdbcType="VARCHAR" property="companyAddress" />
+        <result column="city_id" jdbcType="INTEGER" property="cityId" />
+        <result column="industry_id" jdbcType="INTEGER" property="courseId" />
+        <result column="course_id" jdbcType="INTEGER" property="courseId" />
+        <result column="company_full_name" jdbcType="VARCHAR" property="companyFullName" />
+        <result column="company_category" jdbcType="INTEGER" property="companyCategory" />
+    </resultMap>
+
+    <sql id="INSERT_COLUMNS">company_id,company_name,company_scale,company_intro,company_logo,company_tag,
+    company_bg,company_site,company_found_date,company_address,city_id,industry_id,course_id,company_full_name
+    </sql>
+
+    <sql id="INSERT_PROPERTIES">#{companyId},#{companyName},#{companyScale},#{companyIntro},#{companyLogo},
+    #{companyTag},#{companyBg},#{companySite},#{companyFoundDate},#{companyAddress},#{cityId},#{industryId},#{courseId},
+    #{companyFullName}
+    </sql>
+
+    <select id="list" resultMap="selectResult">
+        SELECT * FROM
+        <include refid="TABLE_NAME"/>
+        ORDER BY company_found_date DESC LIMIT 10
+    </select>
+
+    <select id="getCompanyById" parameterType="int" resultMap="selectResult">
+        SELECT * FROM
+        <include refid="TABLE_NAME"/>
+        WHERE
+        company_id = #{companyId}
+    </select>
+
+</mapper>
